@@ -260,6 +260,32 @@
       (aset! rt i0 (aget tbl (bit-and (unsigned-bit-shift-right l2 60) 0x3f)))
       (String. rt)))))
 
+(with-unchecked
+(let [^chars tbl (into-array Character/TYPE [\- \0 \1 \2 \3 \4 \5 \6 \7 \8
+                                             \9 \A \B \C \D \E \F \G \H \I
+                                             \J \K \L \M \N \O \P \Q \R \S
+                                             \T \U \V \W \X \Y \Z \_ \a \b
+                                             \c \d \e \f \g \h \i \j \k \l
+                                             \m \n \o \p \q \r \s \t \u \v
+                                             \w \x \y \z])]
+  (defn gen-id7 []
+    (let [^ThreadLocalRandom tlr (ThreadLocalRandom/current)
+          l1 (.nextLong tlr) l2 (.nextLong tlr)
+          rt (char-array 22)]
+      (aset rt 21 (aget tbl (bit-and l1 0x3f)))
+      (loop [idx   20
+             shift 6]
+        (if (> idx 10)
+          (do (aset rt idx (aget tbl (bit-and (unsigned-bit-shift-right l1 (* idx 6)) 0x3f)))
+              (recur (dec idx) (+ shift 6)))))
+      (aset rt 10 (aget tbl (bit-and l2 0x3f)))
+      (loop [idx   9
+             shift 6]
+        (if (> idx -1)
+          (do (aset rt idx (aget tbl (bit-and (unsigned-bit-shift-right l2 (* idx 6)) 0x3f)))
+              (recur (dec idx) (+ shift 6)))))
+      (String. rt)))))
+
 ;; ultrarand.core> (c/quick-bench (ultra.Rand/ultraRand))
 ;; Evaluation count : 22333938 in 6 samples of 3722323 calls.
 ;; Execution time mean : 25.350240 ns
@@ -323,3 +349,13 @@
 ;; low-severe	 1 (16.6667 %)
 ;; Variance from outliers : 13.8889 % Variance is moderately inflated by outliers
 ;; nil
+
+
+;;bounds checking and casting makes us sad.
+;; ultrarand.core> (c/quick-bench (gen-id7))
+;; Evaluation count : 10633188 in 6 samples of 1772198 calls.
+;; Execution time mean : 54.628061 ns
+;; Execution time std-deviation : 0.716754 ns
+;; Execution time lower quantile : 54.009733 ns ( 2.5%)
+;; Execution time upper quantile : 55.446705 ns (97.5%)
+;; Overhead used : 1.786742 ns
