@@ -2,42 +2,41 @@
   (:require [insn.core :as insn]
             [insn.op :as op]))
 
-public class blah.demo {
-                        public blah.demo();
-                        Code:
-                        0: aload_0
-                        1: invokespecial #1                  // Method java/lang/Object."<init>":()V
-                        4: return
+;; public class blah.demo
+;; {public blah.demo();
+;;  Code:
+;;  0: aload_0
+;;  1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+;;  4: return
 
-                        public static int aset(int[], int, int);
-                        Code:
-                        0: iload_2
-                        1: ireturn
-                        }
+;;  public static int aset(int[], int, int);
+;;  Code:
+;;  0: iload_2
+;;  1: ireturn}
 
 
-public class demo
-{public static char aset(char [] arr, int idx, char v)
-  {arr[idx] = v;
-   return v;
-   }}
+;; public class demo
+;; {public static char aset(char [] arr, int idx, char v)
+;;   {arr[idx] = v;
+;;    return v;
+;;    }}
 
-public class blah.demo
-{public blah.demo();
- Code:
- 0: aload_0
- 1: invokespecial #1                  // Method java/lang/Object."<init>":()V
- 4: return
+;; public class blah.demo
+;; {public blah.demo();
+;;  Code:
+;;  0: aload_0
+;;  1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+;;  4: return
 
- public static char aset(char[], int, char);
- Code:
- 0: aload_0
- 1: iload_1
- 2: iload_2
- 3: castore
- 4: iload_2
- 5: ireturn
- }
+;;  public static char aset(char[], int, char);
+;;  Code:
+;;  0: aload_0
+;;  1: iload_1
+;;  2: iload_2
+;;  3: castore
+;;  4: iload_2
+;;  5: ireturn
+;;  }
 
 (def class-data
   {:name    'my.pkg.Adder
