@@ -13,6 +13,17 @@
                     [:iload 2]
                     [:ireturn]]}]})
 
+(insn/new-instance
+ {:name "ultrarand.ArraysL"
+  :flags  #{:public}
+  :methods [{:flags #{:public :static}, :name "asetLiteral", :desc [chars :long :char :char]  ;; <-- here
+             :emit [[:aload 0]
+                    [:lload 1]
+                    [:l2i]
+                    [:iload 3]
+                    [:castore]
+                    [:iload 3]
+                    [:ireturn]]}]})
 
 ;; public class blah.demo
 ;; {public blah.demo();
