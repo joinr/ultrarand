@@ -59,13 +59,12 @@
                                              \T \U \V \W \X \Y \Z \_ \a \b
                                              \c \d \e \f \g \h \i \j \k \l
                                              \m \n \o \p \q \r \s \t \u \v
-                                             \w \x \y \z])
-      i (int 21)]
+                                             \w \x \y \z])]
   (defn gen-id2 []
     (let [^ThreadLocalRandom tlr (ThreadLocalRandom/current)
           l1 (.nextLong tlr) l2 (.nextLong tlr)
           rt (char-array 22)]
-      (aset! rt i (aget tbl (bit-and l1 0x3f)))
+      (aset! rt #primitive/int[21] (aget tbl (bit-and l1 0x3f)))
       (aset! rt #primitive/int[20] (aget tbl (bit-and (unsigned-bit-shift-right l1 6) 0x3f)))
       (aset! rt #primitive/int[19] (aget tbl (bit-and (unsigned-bit-shift-right l1 12) 0x3f)))
       (aset! rt #primitive/int[18] (aget tbl (bit-and (unsigned-bit-shift-right l1 18) 0x3f)))
@@ -88,6 +87,8 @@
       (aset! rt #primitive/int[1] (aget tbl (bit-and (unsigned-bit-shift-right l2 54) 0x3f)))
       (aset! rt #primitive/int[0] (aget tbl (bit-and (unsigned-bit-shift-right l2 60) 0x3f)))
       (String. rt))))
+
+
 
 
 (let [^chars tbl (into-array Character/TYPE [\- \0 \1 \2 \3 \4 \5 \6 \7 \8
@@ -200,7 +201,6 @@
       (asetl! rt 1 (aget tbl (bit-and (unsigned-bit-shift-right l2 54) 0x3f)))
       (asetl! rt 0 (aget tbl (bit-and (unsigned-bit-shift-right l2 60) 0x3f)))
       (String. rt)))))
-
 
 (with-unchecked 
 (let [^chars tbl (into-array Character/TYPE [\- \0 \1 \2 \3 \4 \5 \6 \7 \8

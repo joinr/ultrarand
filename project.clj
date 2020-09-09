@@ -7,5 +7,6 @@
                  [com.clojure-goes-fast/clj-java-decompiler "0.3.0"]
                  [insn                     "0.4.0"
                   :exclusions [org.ow2.asm/asm]]
-                 [org.ow2.asm/asm          "7.1"]]
+                 [org.ow2.asm/asm          "7.1"]
+                 [jise "0.1.0-SNAPSHOT"]]
   :java-source-paths ["java"])
