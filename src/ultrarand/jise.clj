@@ -18,8 +18,6 @@
 
 ^:public
 (defclass Rand
-  ;;don't know how to instantiate arrays, we'll just pass in
-  ;;on construction instead of a static member.
   (def ^:public ^:static ^chars tbl
     (new [char] [\- \0 \1 \2 \3 \4 \5 \6 \7 \8
                  \9 \A \B \C \D \E \F \G \H \I
