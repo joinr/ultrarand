@@ -26,9 +26,6 @@
                  \c \d \e \f \g \h \i \j \k \l
                  \m \n \o \p \q \r \s \t \u \v
                  \w \x \y \z]))
-  ^:public ^:static ^char
-  (defm getN []
-    (tbl 0))
   ^:public ^:static  ^String
   (defm genId []
     (let [^ThreadLocalRandom tlr (ThreadLocalRandom/current)
