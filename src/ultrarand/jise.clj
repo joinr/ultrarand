@@ -32,7 +32,7 @@
           ^long  l1 (.nextLong tlr)
           ^long  l2 (.nextLong tlr)
           ^chars rt (new [char] 22)]
-      (set! (rt 21) (tbl ^int (&  l1 0x3f)))
+      (aset rt 21 (tbl ^int (&  l1 0x3f)))
       (aset rt 20 (tbl ^int (&  (>>> l1 6) 0x3f)))
       (aset rt 19 (tbl ^int (&  (>>> l1 12) 0x3f)))
       (aset rt 18 (tbl ^int (&  (>>> l1 18) 0x3f)))
@@ -54,22 +54,45 @@
       (aset rt 2  (tbl ^int (&  (>>> l2 48) 0x3f)))
       (aset rt 1  (tbl ^int (&  (>>> l2 54) 0x3f)))
       (aset rt 0  (tbl ^int (&  (>>> l2 60) 0x3f)))
+      (String. rt)))
+  ^:public ^:static  ^String
+  (defm genIdMutable []
+    (let [^ThreadLocalRandom tlr (ThreadLocalRandom/current)
+          ^long  l1 (.nextLong tlr)
+          ^long  l2 (.nextLong tlr)
+          ^chars rt (new [char] 22)]
+      (aset rt 21 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 20 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 19 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 18 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 17 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 16 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 15 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 14 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 13 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 12 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 11 (tbl ^int (&  l1 0x3f)))(set! l1 (>>> l1 6))
+      (aset rt 10 (tbl ^int (&  l2 0x3f)))
+      (aset rt 9  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 8  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 7  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 6  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 5  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 4  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 3  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 2  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 1  (tbl ^int (& l2 0x3f)))(set! l2 (>>> l2 6))
+      (aset rt 0  (tbl ^int (& l2 0x3f)))
       (String. rt))))
 
 
 ^:public
 (defclass Test
   (def ^:public ^:static ^chars tbl
-    (new [char] [\- \0 \1 \2 \3 \4 \5 \6 \7 \8
-                 \9 \A \B \C \D \E \F \G \H \I
-                 \J \K \L \M \N \O \P \Q \R \S
-                 \T \U \V \W \X \Y \Z \_ \a \b
-                 \c \d \e \f \g \h \i \j \k \l
-                 \m \n \o \p \q \r \s \t \u \v
-                 \w \x \y \z]))
+    (new [char] [\a]))
   ^:public ^:static
   (defm setChar [^char c]
-    (set! (tbl 0) c)))
+    (aset tbl 0 c)))
 
 ;; public class Rand
 ;; {
